@@ -1,0 +1,59 @@
+{
+  "variables": {
+    "coal_release": "20170622-20170623T043049Z-gb9ac8cc-4gb",
+    "coal_vmx": "tmp/coal-release-20170622-20170623T043049Z-gb9ac8cc-4gb.vmwarevm/USB-headnode.vmx",
+    "vm_name": "manta-headnode"
+  },
+  "builders": [
+    {
+      "type": "vmware-vmx",
+      "source_path": "{{user `coal_vmx`}}",
+      "output_directory": "output/{{user `vm_name`}}",
+      "communicator": "ssh",
+      "ssh_username": "root",
+      "ssh_password": "rootpass",
+      "ssh_timeout": "20m",
+      "boot_wait": "3s",
+      "boot_command": [
+        "c",
+        "variable os_console vga<enter><esc>",
+        "<down><enter>",
+        "<wait10><wait10><wait5>",
+        "<enter><wait5>",
+        "Clavius<enter>",
+        "orbit<enter>",
+        "coal-1<enter>",
+        "Moon, Earth<enter>",
+        "<wait5><enter><wait5>",
+        "2<enter>",
+        "10.99.99.7<enter>",
+        "<enter>",
+        "<enter><wait5>",
+        "<enter><wait5>",
+        "1<enter><wait>",
+        "10.88.88.200<enter><wait>",
+        "<enter><wait>",
+        "10.88.88.2<enter><wait>",
+        "<enter><wait>",
+        "<enter><wait>",
+        "<enter><wait5>",
+        "<enter><wait>",
+        "<enter><wait>",
+        "<enter><wait>",
+        "example.com<enter>",
+        "example.com<enter>",
+        "<enter><wait10><wait5>",
+        "rootpass<enter>",
+        "rootpass<enter>",
+        "adminpass1<enter>",
+        "adminpass1<enter>",
+        "<enter>",
+        "<enter>",
+        "<enter>",
+        "<enter>",
+        "<enter>"
+      ],
+      "shutdown_command": "shutdown -y now"
+    }
+  ]
+}
